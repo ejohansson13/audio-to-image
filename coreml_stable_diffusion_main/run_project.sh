@@ -5,7 +5,7 @@ ffmpeg -f avfoundation -i ":0" -ar 16000 -t 10 /PATH/TO/audio recording director
 
 /PATH/TO/whisper.cpp-master/main -m /PATH/TO/whisper.cpp-master/models/ggml-medium.bin -nt -otxt -of /PATH/TO/txt file directory/test${i}.txt -f /PATH/TO/audio recording directory/test${i}.wav
 
-# multilingual option: specify language or let whisper detect it
+# multilingual option: specify language arg or let whisper detect it (delete language arg)
 #/PATH/TO/whisper.cpp-master/main --language spanish -m /PATH/TO/whisper.cpp-master/models/ggml-large.bin -tr -nt -otxt -of /PATH/TO/txt file directory/test${i}.txt -f /PATH/TO/audio recording directory/test${i}.wav
 
 # remove_parentheses file removes any associated ({[]}) written through whisper's transcription
