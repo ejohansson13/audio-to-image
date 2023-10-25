@@ -1,6 +1,8 @@
 i=$(cat /PATH/TO/version_num.txt)
 seed=$(cat /PATH/TO/seed_num.txt)
 
+# device 0 should refer to mac microphone, if you're not sure or want to double check your available devices, run the below command first:
+# ffmpeg -f avfoundation -list_devices true -i ""
 ffmpeg -f avfoundation -i ":0" -ar 16000 -t 10 /PATH/TO/audio recording directory/test${i}.wav
 
 /PATH/TO/whisper.cpp-master/main -m /PATH/TO/whisper.cpp-master/models/ggml-medium.bin -nt -otxt -of /PATH/TO/txt file directory/test${i}.txt -f /PATH/TO/audio recording directory/test${i}.wav
