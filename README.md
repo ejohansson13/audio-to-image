@@ -37,7 +37,7 @@ Lastly, we arrive at the engine of our pipeline: Stable Diffusion. Responsible f
 
 Overview of technology:
 
-Stable Diffusion is pre-trained on a wide variety of image-caption pairs captured from the Internet. Those developed by Stability AI employ a Latent Diffusion Model with pre-trained text encoders employing the CLIP procedure to understand visual concepts. Latent diffusion models are trained on a variety of CLIP architecture differs from other image models by jointly training a text encoder and image encoder to learn the correct pairings for image-text training examples. It can then be further enhanced by training on datasets by embedding the names or descriptions of the target dataset classes. An example can be seen below
+Stable Diffusion is pre-trained on a wide variety of image-caption pairs captured from the Internet. Those developed by Stability AI employ a Latent Diffusion Model with pre-trained text encoders employing the CLIP procedure to understand visual concepts. Latent diffusion models learn through deconstruction of their training images how to construct new image concepts from white noise. .CLIP architecture differs from other image models by jointly training a text encoder and image encoder to learn the correct pairings for image-text training examples. It can then be further enhanced by training on datasets by embedding the names or descriptions of the target dataset classes. An example can be seen below
 
 How technology fits into our pipeline:
 
