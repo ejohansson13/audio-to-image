@@ -1,6 +1,6 @@
 ﻿TO-DO
 
-1. Add NLP classifier for image prompts to then add more descriptive language for better performing image generation
+1. Add NLP classifier for image prompts for more descriptive language and better performing image generation
 
 2. Play around with other audio transcription models to see if similar or better performance to Whisper can be found with less memory consumption
 
