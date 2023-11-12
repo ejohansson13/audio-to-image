@@ -30,14 +30,21 @@ Stable Diffusion is pre-trained on a wide variety of image-caption pairs capture
 
 We can't have an image generation pipeline without an image generator! Leveraging the CoreML framework for Stable Diffusion allows for rapid image synthesis with minimized latency. Total runtime for this pipeline on a 2021 14" Macbook Pro with the M1 Pro chip is under 50 seconds with the default number of inference steps (50). Later generations of Apple Silicon should offer faster performance. Unlike Stable Diffusion XL, SD2.1 and earlier versions' image qualities are tightly correlated with the descriptiveness of the prompt. Keep that in mind when speaking your chosen prompt. If using SDXL, be aware of the longer runtime especially with first generation Apple Silicon. I have plans to add a rudimentary classifier to augment prompts with descriptive language. For now, check out this link: **link here** for potential descriptors you can use depending on your prompt category. Hope you enjoy this repository and whatever your reason for wanting a hands-free image synthesizer, I hope this helps. Have fun!!!
 
-#### Quantization and Palettization
-
-Keeping an eye on the growing memory needs of machine learning applications, Apple designed [new tools for model compression](https://developer.apple.com/videos/play/wwdc2023/10047/) and optimized on-device throughput. The video covers it in fantastic detail, but I'll give a short overview. At every layer of these *giant* neural networks, each parameter holds a very specific weight. These weights are so specific, they are either stored in half-precision floating-point memory or fp16. Each fp16 weight is 16 bits or 2 bytes. Stable Diffusion has about 860 million parameters. Ballpark: 860m parameters at 2 bytes/parameter, we have a 1.6GB model, a fairly significant chunk of memory and the majority of the memory requirements of this repository. To compensate for these increasing memory costs, Apple introduced two new techniques. Quantization uses a multiplier and optional bias to shrink the number of bits required in storing numbers. 250 with a scale of 5.20 becomes **include some kind of image**
-
 # Shortcut
 
 Provide bash script to install all above technologies sequentially
 
+#### Quantization and Palettization
+
+Keeping an eye on the growing memory needs of machine learning applications, Apple designed [new tools for lossy model compression](https://developer.apple.com/videos/play/wwdc2023/10047/). The video covers it in fantastic detail, but I'll give a short overview. At every layer of these *giant* neural networks, each parameter holds a very specific weight. These weights are either stored in half-precision floating-point memory (fp16) or single-precision floating-point (fp32). Each fp16 weight is 16 bits or 2 bytes (fp32 is double the size). Stable Diffusion has about 860 million parameters. At 2 bytes/parameter, we have a 1.6GB model, a significant chunk of memory. To compensate for these increasing memory costs associated with machine learning models, Apple introduced two new techniques. Quantization uses a multiplier and optional bias to shrink the number of bits required in storing numbers. An int representation of 203.4 with a scale of 2.35 becomes 86, minimizing the information needed to store these weights. 
+
+**quantization image**
+
+Quantization is a uniform lowering of precision and can halve the memory associated with our model.
+
+Palettization is a non-uniform lowering of precision and can decrease our memory requirements up to 8x. It uses clustering to represent similar values with a center value in the range middle. We can then store the center value in a lookup table and have the corresponding indices of the lookup table replace the actual weights. By replacing 16-bit weights with their respective n-bit lookup tables, we are able to control our memory footprint 
+
+**palettization image**
 
 #### Disclaimer
 
@@ -45,4 +52,5 @@ Please keep in mind general ethical and safety guidelines when utilizing any ima
 
 
 #### Sources
-[1] https://en.wikipedia.org/wiki/FFmpeg
+[1] https://en.wikipedia.org/wiki/
+[2] https://developer.apple.com/videos/play/wwdc2023/10047/
