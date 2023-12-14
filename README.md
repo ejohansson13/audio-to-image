@@ -27,21 +27,25 @@ Stable Diffusion employs Latent Diffusion Models in concert with pre-trained ope
 
 Stable Diffusion is ultimately responsible our image generation. Until now, our pipleline has been focused on easing the user's prompting responsibility and transcribing our audio to an understandable medium for our image generation model. Unlike Stable Diffusion XL, SD2.1 and earlier versions' image qualities are tightly correlated with the descriptiveness of the prompt. Keep that in mind when speaking your chosen prompt. If using SDXL, be aware of the longer runtime especially with first generation Apple Silicon. If you're interested in reading more about Stable Diffusion XL and its distinction from previous stable diffusion models, check out [this resource](https://github.com/ejohansson13/concepts_explained/tree/main/Stable%20Diffusion%20XL). Stable Diffusion quickly grew to immense popularity for its unlocking of abstract concepts and grasp of differing artistic styles. Popularizing text-to-image synthesis unlocked a new medium for artists to quickly audit conceptual art or serve as a springboard for future inspiration. Whatever your reason for this pipeline, I hope you enjoy these amazing technologies and benefit from their open-source access!
 
+#### Quantization and Palettization
+
+Keeping an eye on the growing memory needs of machine learning applications, Apple designed new tools for lossy model compression. [This video](https://developer.apple.com/videos/play/wwdc2023/10047/) covers it in fantastic detail, but I'll give a short overview. At every layer of these giant neural networks, each parameter holds a very specific weight. These weights are either stored in half-precision floating-point memory (fp16) or single-precision floating-point (fp32). Each fp16 weight is 16 bits or 2 bytes (fp32 is double the size). Stable Diffusion 2.1 has about 860 million parameters. At 2 bytes/parameter, we have a 1.6GB model, a significant chunk of memory. To compensate for these increasing memory costs associated with machine learning models, Apple introduced two new techniques, quantization and palettization.
+
+Quantization uses a multiplier and optional bias to shrink the number of bits required in storing numbers. If we want to condense our memory representation of 203.4, we can use an int representation and scale. 203.4 becomes 86 with a scale of 2.35. Our scale and int value can later dequantize our weights. Some precision is lost in this approximation, but it significantly minimizes our information needed to store these weights. Quantization is a uniform lowering of precision and can halve the memory associated with our model. This is fantastic from a memory conservation perspective, but performance is dependent on weights' survivability in being reduced.
+<p align="center" width="100%">
+  <img src="quantization.png" alt="Screenshot demonstrating an example of Apple's coreML quantization method" width="60%"
+</p>
+
+Palettization is a non-uniform lowering of precision and can decrease our memory requirements up to 8x. It uses clustering to represent similar values with a cluster centroid value. We can then store the centroid values in a lookup table. Our matrix of weights is replaced with n-bit values containing the respective weights' indices in the lookup table. In the example below, we can cluster 6.2, 6.6, 6.8, 6.9, and 6.3 and represent them with a centroid value of 6.5. Their matrix indices can then be replaced with the lookup table index 00 representing their centroid value. This becomes especially important as we scale up the precision of our weights and allows us to significantly reduce their memory footprint.
+<p align="center" width="100%">
+  <img src="palettization.png" alt="Screenshot demonstrating an example of Apple's coreML palettization method" width="60%"
+</p>
+
+More about Pcuenq and his blog posts mixed-weight optimization
+
 # Shortcut
 
 Provide bash script to install all above technologies sequentially
-
-#### Quantization and Palettization
-
-Keeping an eye on the growing memory needs of machine learning applications, Apple designed new tools for lossy model compression. [This video](https://developer.apple.com/videos/play/wwdc2023/10047/) covers it in fantastic detail, but I'll give a short overview. At every layer of these giant neural networks, each parameter holds a very specific weight. These weights are either stored in half-precision floating-point memory (fp16) or single-precision floating-point (fp32). Each fp16 weight is 16 bits or 2 bytes (fp32 is double the size). Stable Diffusion 2.1 has about 860 million parameters. At 2 bytes/parameter, we have a 1.6GB model, a significant chunk of memory. To compensate for these increasing memory costs associated with machine learning models, Apple introduced two new techniques. Quantization uses a multiplier and optional bias to shrink the number of bits required in storing numbers. An int representation of 203.4 with a scale of 2.35 becomes 86, minimizing the information needed to store these weights. 
-
-**quantization image**
-
-Quantization is a uniform lowering of precision and can halve the memory associated with our model.
-
-Palettization is a non-uniform lowering of precision and can decrease our memory requirements up to 8x. It uses clustering to represent similar values with a center value in the range middle. We can then store the center value in a lookup table and have the corresponding indices of the lookup table replace the actual weights. By replacing 16-bit weights with their respective n-bit lookup tables, we are able to control our memory footprint 
-
-**palettization image**
 
 #### Disclaimer
 
