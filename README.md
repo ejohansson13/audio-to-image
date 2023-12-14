@@ -36,12 +36,12 @@ Quantization uses a multiplier and optional bias to shrink the number of bits re
   <img src="quantization.png" alt="Screenshot demonstrating an example of Apple's coreML quantization method" width="60%"
 </p>
 
-Palettization is a non-uniform lowering of precision and can decrease our memory requirements up to 8x. It uses clustering to represent similar values with a cluster centroid value. We can then store the centroid values in a lookup table. Our matrix of weights is replaced with n-bit values containing the respective weights' indices in the lookup table. In the example below, we can cluster 6.2, 6.6, 6.8, 6.9, and 6.3 and represent them with a centroid value of 6.5. Their matrix indices can then be replaced with the lookup table index 00 representing their centroid value. This becomes especially important as we scale up the precision of our weights and allows us to significantly reduce their memory footprint.
+Palettization is a non-uniform lowering of precision and can decrease our memory requirements up to 8x. It uses clustering to represent similar values with a cluster centroid value. We can then store the centroid values in a lookup table. Our matrix of weights is replaced with n-bit values containing the respective weights' indices in the lookup table. In the example below, we can cluster 6.2, 6.6, 6.8, 6.9, and 6.3 and represent them with a centroid value of 6.5. Their matrix indices can then be replaced with the lookup table index 00 representing their centroid value. This becomes especially important as we scale up the precision of our weights and allows us to significantly reduce their memory footprint. Representing 16-bit weights with 2-bit palettization can offer immense memory savings with manageable performance tradeoffs.
 <p align="center" width="100%">
   <img src="palettization.png" alt="Screenshot demonstrating an example of Apple's coreML palettization method" width="60%"
 </p>
 
-More about Pcuenq and his blog posts mixed-weight optimization
+If you're interested in reading more about utilizing quantization/palettization to decrease memory costs associated with Stable Diffusion models, make sure to check out Pedro Cuenca's Hugging Face blogs on the topics, they're an invaluable resource. In particular, he highlights how image inference [can be sped up](https://huggingface.co/blog/fast-diffusers-coreml) with palettization and how [mixed-bit palettization](https://huggingface.co/blog/stable-diffusion-xl-coreml) can actually optimize SDXL inference times.
 
 # Shortcut
 
