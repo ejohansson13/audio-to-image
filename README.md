@@ -1,7 +1,7 @@
 # audio-to-image
 
 Overview of project:
-This repository provides an audio-to-image synthesis pipeline through a Bash script by utilizing multiple open-source libraries: FFmpeg, Whisper, and Stable Diffusion to create a Bash pipeline for audio-to-image synthesis. Users can select a time window within which they propose an image prompt, after which a 512x512 image will be output. This repository is currently compatible with MacOS but alternative technologies exist for Windows and Linux. The modular build allows for plug-and-play functionality with OS-specific technologies. Total memory of all provided technologies: XGB
+This repository provides an audio-to-image synthesis pipeline through a Bash script by utilizing multiple open-source libraries: FFmpeg, Whisper, and Stable Diffusion to create a Bash pipeline for audio-to-image synthesis. Users can select a time window within which they propose an image prompt, after which a 512x512 image will be output. This repository is currently compatible with MacOS but alternative technologies exist for Windows and Linux. The modular build allows for plug-and-play functionality with OS-specific technologies.
 
 At each stage are instructions on installing the technologies and a brief overview of their functional modularity. If you're not interested, feel free to skip to the shortcut section and read about how shortcut_install.sh can install all the technologies for you.
 
@@ -46,6 +46,10 @@ If you're interested in reading more about utilizing quantization/palettization 
 # Shortcut
 
 Provide bash script to install all above technologies sequentially
+
+You can check if you already have homebrew installed by typing "brew update" into your Terminal command line. If you receive an error such as 
+
+You can check if you already have git installed by typing "git --version" into your Terminal command line.
 
 #### Disclaimer
 
