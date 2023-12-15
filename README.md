@@ -51,6 +51,8 @@ You can check if you already have homebrew installed by typing "brew update" int
 
 You can check if you already have git installed by typing "git --version" into your Terminal command line.
 
+Check if you have Anaconda previously installed. Necessary for creating virtual environment to run pipeline
+
 #### Disclaimer
 
 Please keep in mind general ethical and safety guidelines when utilizing any image generation technology. If you have any questions, OpenAI's [usage policies](https://openai.com/policies/usage-policies) are a good place to start. 
