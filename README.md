@@ -43,6 +43,10 @@ Palettization is a non-uniform lowering of precision and can decrease our memory
 
 If you're interested in reading more about utilizing quantization/palettization to decrease memory costs associated with Stable Diffusion models, make sure to check out Pedro Cuenca's Hugging Face blogs on the topics, they're an invaluable resource. In particular, he highlights how image inference [can be sped up](https://huggingface.co/blog/fast-diffusers-coreml) with palettization and how [mixed-bit palettization](https://huggingface.co/blog/stable-diffusion-xl-coreml) can actually optimize SDXL inference times.
 
+### Anaconda environment
+Since we are running a Python pipeline, we need an environment to run 
+[](https://docs.anaconda.com/free/anaconda/install/mac-os/)
+
 # Shortcut
 
 Provide bash script to install all above technologies sequentially
