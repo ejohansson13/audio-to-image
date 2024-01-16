@@ -1,0 +1,11 @@
+Python == 3.10
+
+
+cattrs (23.1.2)
+coremltools (7.0b2)
+invisible-watermark (0.2.0)
+opencv-python (4.8.0.76)
+protobuf (3.20.3)
+pyaml (23.7.0)
+pywavelets (1.4.1)
+pyyaml (6.0)
