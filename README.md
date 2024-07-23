@@ -73,7 +73,7 @@ conda deactivate
 At this point, we should have FFmpeg installed and the Whisper and CoreML Stable Diffusion repositories pulled locally. We should also now have a functioning local conda environment to run our pipeline. Let’s organize our directories, so they’re locally accessible for our Shell script (this is optional, you can also use absolute paths to access the different pipeline components). 
 
 <p align="center" width="100%">
-  <img src="/assets/working_directory.png" width="50%">
+  <img src="working_directory.png" width="50%">
 </p>
 
 After pulling the whisper.cpp repository, we can nestle it inside of the coreml_stable_diffusion_main repository, along with our three output folders: Images, Recordings, Text. This is the expected directory layout for the run_project.sh file. Feel free to change your directory layout, but make sure to update the corresponding commmands in the shell file. 
