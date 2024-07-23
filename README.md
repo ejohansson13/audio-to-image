@@ -42,23 +42,56 @@ Palettization is a non-uniform lowering of precision and can decrease memory req
 
 If you're interested in reading more about utilizing quantization/palettization to decrease memory costs associated with Stable Diffusion models, make sure to check out Pedro Cuenca's Hugging Face blogs on the topics. In particular, he highlights how image inference [can be sped up](https://huggingface.co/blog/fast-diffusers-coreml) with palettization and how [mixed-bit palettization](https://huggingface.co/blog/stable-diffusion-xl-coreml) can actually optimize SDXL inference times.
 
-# Shortcut
+# Setup
 
-Check out the associated shortcut_install.sh bash file for all of the associated commands that will be installed. Double check that you do not already have these technologies downloaded. Feel free to selectively download the packages you need to run the pipeline. 
+### Setting Up Conda Environment:
 
-Provide bash script to install all above technologies sequentially
+The first step is installing the above open-source libraries: FFmpeg, Whisper (Apple Silicon port), and Apple’s CoreML Stable Diffusion repository. You can revisit each section above to determine how to do so. Next, you’ll want to double check you have miniconda downloaded. Navigate to your terminal, and type the following command:
 
-You can check if you already have homebrew installed by typing "brew update" into your Terminal command line. If you receive an error such as 
+```
+conda --version
+```
 
-You can check if you already have git installed by typing "git --version" into your Terminal command line.
+If the above command shows “conda command is not recognized”, you’ll need to [download miniconda](https://docs.anaconda.com/miniconda/miniconda-install/). Once you have miniconda on your machine, we can get started creating our local environment for the audio to image synthesis pipeline. Run the following commands in order:
 
-Check if you have Anaconda previously installed. Necessary for creating virtual environment to run pipeline
+```
+conda create -n audio2image python=3.9.17 -y
+
+conda activate audio2image
+
+pip install -r requirements.txt
+```
+
+Feel free to change “audio2img” to any other preferred environment name. We now have a local environment for image generation. We can exit the environment with the below command:
+
+```
+conda deactivate
+```
+
+### Setting Up Working Directory:
+
+At this point, we should have FFmpeg installed and the Whisper and CoreML Stable Diffusion repositories pulled locally. We should also now have a functioning local conda environment to run our pipeline. Let’s organize our directories, so they’re locally accessible for our Shell script (this is optional, you can also use absolute paths to access the different pipeline components). 
+
+<p align="center" width="100%">
+  <img src="/assets/working_directory.png" width="50%">
+</p>
+
+After pulling the whisper.cpp repository, we can nestle it inside of the coreml_stable_diffusion_main repository, along with our three output folders: Images, Recordings, Text. This is the expected directory layout for the run_project.sh file. Feel free to change your directory layout, but make sure to update the corresponding commmands in the shell file. 
 
 #### Disclaimer
 
-Please keep in mind general ethical and safety guidelines when utilizing any image generation technology. If you have any questions, OpenAI's [usage policies](https://openai.com/policies/usage-policies) are a good place to start. 
+Please keep in mind general ethical and safety guidelines when utilizing any image generation technology. OpenAI's [usage policies](https://openai.com/policies/usage-policies) are a good place to start. 
 
 
 #### Sources
-[1] https://en.wikipedia.org/wiki/
-[2] https://developer.apple.com/videos/play/wwdc2023/10047/
+[1] https://phoenixnap.com/kb/ffmpeg-mac
+
+[2] https://github.com/ggerganov/whisper.cpp
+
+[3] https://cdn.openai.com/papers/whisper.pdf
+
+[4] https://github.com/apple/ml-stable-diffusion
+
+[5] https://arxiv.org/pdf/2112.10752
+
+[6] https://developer.apple.com/videos/play/wwdc2023/10047/
