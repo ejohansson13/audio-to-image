@@ -1,7 +1,0 @@
-﻿TO-DO
-
-1. Add NLP classifier for image prompts for more descriptive language and better performing image generation
-
-2. Play around with other audio transcription models to see if similar or better performance to Whisper can be found with less memory consumption
-
-3. Change text processing to Perl: gives opportunity to learn Perl and may offer faster performance with removing parentheses from audio transcription 
